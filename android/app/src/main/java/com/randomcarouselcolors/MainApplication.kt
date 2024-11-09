@@ -1,4 +1,4 @@
-package com.reactlatinrosary
+package com.gabrielsereno.tercolatim
 
 import android.app.Application
 import com.facebook.react.PackageList
