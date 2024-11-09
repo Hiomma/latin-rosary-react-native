@@ -1,118 +1,145 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {BookOpenText, Church, HandHelping} from 'lucide-react-native';
 import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {StatusBar} from 'react-native';
+import {Provider, useSelector} from 'react-redux';
+import HomePage from './app/pages/Home.page';
+import MassesPage from './app/pages/Masses.page';
+import PrayersPage from './app/pages/Prayers.page';
+import RosaryPage from './app/pages/Rosary.page';
+import ViewMassPage from './app/pages/ViewMass.page';
+import ViewPrayerPage from './app/pages/ViewPrayer.page';
+import store, {RootState} from './app/store';
+import colors from './app/styles/colors';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+type StackNavigatorProps = {
+  page: 'Rosary' | 'Mass' | 'Prayer';
+};
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+const getTabBarIcon = (routeName: string) => {
+  let icon;
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+  switch (routeName) {
+    case 'RosariesTab':
+      icon = <Church color={'white'} />;
+      break;
+    case 'PrayersTab':
+      icon = <HandHelping color={'white'} />;
+      break;
+    case 'MassesTab':
+      icon = <BookOpenText color={'white'} />;
+      break;
+  }
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  return icon;
+};
+
+const StackNavigator: React.FC<StackNavigatorProps> = ({page}) => {
+  const screens = {
+    Rosary: [
+      {
+        name: 'Home',
+        component: HomePage,
+      },
+      {name: 'Rosary', component: RosaryPage},
+    ],
+    Prayer: [
+      {
+        name: 'Prayers',
+        component: PrayersPage,
+      },
+      {name: 'ViewPrayer', component: ViewPrayerPage},
+    ],
+    Mass: [
+      {
+        name: 'Masses',
+        component: MassesPage,
+      },
+      {name: 'ViewMass', component: ViewMassPage},
+    ],
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <Stack.Navigator>
+      {screens[page].map(s => (
+        <Stack.Screen
+          key={s.name}
+          name={s.name}
+          component={s.component as React.ComponentType<any>}
+          options={{headerShown: false}}
+        />
+      ))}
+    </Stack.Navigator>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+const RosariesScreen = () => <StackNavigator page="Rosary" />;
+const PrayersScreen = () => <StackNavigator page="Prayer" />;
+const MassesScreen = () => <StackNavigator page="Mass" />;
+
+const Navigation = () => {
+  const isTabBarVisible = useSelector(
+    (state: RootState) => state.home.isTabBarVisible,
+  );
+
+  return (
+    <>
+      <StatusBar backgroundColor={colors.background} barStyle="light-content" />
+      <NavigationContainer>
+        <Tab.Navigator
+          screenOptions={({route}) => ({
+            tabBarIcon: () => getTabBarIcon(route.name),
+            tabBarStyle: {
+              display: isTabBarVisible ? 'flex' : 'none',
+              backgroundColor: colors.backgroundSecondary,
+            },
+            tabBarActiveTintColor: '#FFFFFF',
+            tabBarInactiveTintColor: '#BDBDBD',
+            tabBarLabelStyle: {
+              fontSize: 14,
+            },
+          })}>
+          <Tab.Screen
+            name="RosariesTab"
+            component={RosariesScreen}
+            options={{
+              headerShown: false,
+              tabBarLabel: 'Rosários',
+            }}
+          />
+          <Tab.Screen
+            name="PrayersTab"
+            component={PrayersScreen}
+            options={{
+              headerShown: false,
+              tabBarLabel: 'Orações',
+            }}
+          />
+          <Tab.Screen
+            name="MassesTab"
+            component={MassesScreen}
+            options={{
+              headerShown: false,
+              tabBarLabel: 'Missas',
+            }}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </>
+  );
+};
+
+const App: React.FC = () => {
+  return (
+    <Provider store={store}>
+      <Navigation></Navigation>
+    </Provider>
+  );
+};
 
 export default App;

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "RandomCarouselColors.app"
-               BlueprintName = "RandomCarouselColors"
-               ReferencedContainer = "container:RandomCarouselColors.xcodeproj">
+               BuildableName = "ReactLatinRosary.app"
+               BlueprintName = "ReactLatinRosary"
+               ReferencedContainer = "container:ReactLatinRosary.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "RandomCarouselColorsTests.xctest"
-               BlueprintName = "RandomCarouselColorsTests"
-               ReferencedContainer = "container:RandomCarouselColors.xcodeproj">
+               BuildableName = "ReactLatinRosaryTests.xctest"
+               BlueprintName = "ReactLatinRosaryTests"
+               ReferencedContainer = "container:ReactLatinRosary.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "RandomCarouselColors.app"
-            BlueprintName = "RandomCarouselColors"
-            ReferencedContainer = "container:RandomCarouselColors.xcodeproj">
+            BuildableName = "ReactLatinRosary.app"
+            BlueprintName = "ReactLatinRosary"
+            ReferencedContainer = "container:ReactLatinRosary.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "RandomCarouselColors.app"
-            BlueprintName = "RandomCarouselColors"
-            ReferencedContainer = "container:RandomCarouselColors.xcodeproj">
+            BuildableName = "ReactLatinRosary.app"
+            BlueprintName = "ReactLatinRosary"
+            ReferencedContainer = "container:ReactLatinRosary.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

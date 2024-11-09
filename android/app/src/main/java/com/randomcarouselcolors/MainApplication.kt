@@ -1,4 +1,4 @@
-package com.randomcarouselcolors
+package com.reactlatinrosary
 
 import android.app.Application
 import com.facebook.react.PackageList

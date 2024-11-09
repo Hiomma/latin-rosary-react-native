@@ -77,9 +77,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.randomcarouselcolors"
+    namespace "com.reactlatinrosary"
     defaultConfig {
-        applicationId "com.randomcarouselcolors"
+        applicationId "com.reactlatinrosary"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
