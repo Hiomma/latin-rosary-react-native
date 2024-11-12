@@ -2,8 +2,9 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {BookOpenText, Church, HandHelping} from 'lucide-react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StatusBar} from 'react-native';
+import RNBootSplash from 'react-native-bootsplash';
 import {Provider, useSelector} from 'react-redux';
 import HomePage from './app/pages/Home.page';
 import MassesPage from './app/pages/Masses.page';
@@ -135,6 +136,10 @@ const Navigation = () => {
 };
 
 const App: React.FC = () => {
+  useEffect(() => {
+    RNBootSplash.hide({fade: true});
+  }, []);
+
   return (
     <Provider store={store}>
       <Navigation></Navigation>
