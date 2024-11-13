@@ -25,14 +25,14 @@ jobs:
            node-version: '16'
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --force
 
       - name: Grant execute permission for gradlew
         run: chmod +x android/gradlew
 
       - name: Build Android Release
         working-directory: android
-        run: ./gradlew clean assembleRelease
+        run: ./gradlew clean assembleRelease --stacktrace
 
       - name: Deploy to Google Play
         uses: r0adkll/upload-google-play@v1
